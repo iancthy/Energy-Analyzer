@@ -4,7 +4,7 @@
 
 ## 📘 Overview
 
-**Energy Analyzer** is an interactive web project developed for our **Physics Finals (PHYTRCSI)**.
+**Energy Analyzer** is an interactive web project developed for our **Physics Finals (PHY101)**.
 It helps users **learn, calculate, and analyze** fundamental physics concepts such as **Work, Power, and Energy**.
 The project includes a **learning section**, an **energy calculator**, and an **interactive quiz** — making it both **educational and engaging**.
 
@@ -47,15 +47,6 @@ This project is still **ongoing**, with more features and learning materials com
 * **HTML** – Structure
 * **CSS** – Design and Animation
 * **JavaScript** – Functionality and Interaction
-
----
-
-## 🧾 Team
-
-**Developed by:** [Your Names Here]
-**Course:** PHYTRCSI — Physics in the Modern World
-**Instructor:** [Professor’s Name]
-**Institution:** Batangas State University – Mabini Campus
 
 ---
 
