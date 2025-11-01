@@ -1,15 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Energy  Analyzer</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<style>
 body {
   background-color: #101820;
 }
+
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -24,7 +16,7 @@ body {
 
 .navbar ul {
   display: flex;
-  gap: 100px;
+  gap: 50px;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -35,26 +27,54 @@ body {
   text-decoration: none;
   font-weight: 500;
   transition: 0.3s;
-  font-family: "inter", sans-serif;
-  font-size: 30px;
-}
-.navbar .logo-text {
-  color: white;
+  font-family: "montserrat", sans-serif;
+  font-size: 20px;
 }
 
-</style>
-<body>
-        <nav class="navbar">
-      <div class="logo-container">
-        <img src="logo.png" alt="Logo">
-        <span class="logo-text">MyWebsite</span>
-      </div>
-      <ul>
-        <li><a href="#">Main</a></li>
-        <li><a href="#">Learn</a></li>
-        <li><a href="#">Quiz</a></li>
-        <li><a href="#">About</a></li>
-      </ul>
-    </nav>
-</body>
-</html>
+.navbar .logo-text {
+  color: white;
+  font-family: "montserrat", sans-serif;
+  color: rgb(196, 13, 13);
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.input {
+  margin-right: 1000px;
+  padding: 100px;
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.result {
+  background-color: blue;
+  padding: 80px;
+  position: absolute;
+  margin-top: -475px;
+  margin-left: 800px;
+  font-family: "montserrat", sans-serif;
+  color: white;
+  font-size: 18px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  width: 400px;
+}
+
+.bar-container {
+  height: 20px;
+  background: #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.bar {
+  height: 100%;
+  width: 0%;
+  transition: width 0.8s ease-in-out;
+  background: linear-gradient(90deg, #6a82fb, #fc5c7d, #f7b733);
+  background-size: 200% 100%;
+  animation: moveGradient 2s linear infinite;
+}
+
