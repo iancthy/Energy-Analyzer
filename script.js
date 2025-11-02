@@ -2,15 +2,17 @@ const inputs = document.querySelectorAll("input");
 inputs.forEach(input => input.addEventListener("input", calculateEnergy));
 
 function calculateEnergy() {
-    const m = parseFloat(document.getElementById("mass").value);
-    const v = parseFloat(document.getElementById("velocity").value);
-    const h = parseFloat(document.getElementById("height").value);
-    const d = parseFloat(document.getElementById("distance").value);
-    const t = parseFloat(document.getElementById("time").value);
+    // Default to 0 if empty or invalid
+    const m = parseFloat(document.getElementById("mass").value) || 0;
+    const v = parseFloat(document.getElementById("velocity").value) || 0;
+    const h = parseFloat(document.getElementById("height").value) || 0;
+    const d = parseFloat(document.getElementById("distance").value) || 0;
+    const t = parseFloat(document.getElementById("time").value) || 0;
     const g = 9.81;
 
-    if (isNaN(m) || isNaN(v) || isNaN(h) || isNaN(d) || isNaN(t) || t <= 0) {
-        document.getElementById("energyMsg").textContent = "⚡ Enter all values to analyze energy";
+    // Prevent division by zero
+    if (t <= 0) {
+        document.getElementById("energyMsg").textContent = "⚡ Time must be greater than zero";
         return;
     }
 
@@ -27,11 +29,11 @@ function calculateEnergy() {
     document.getElementById("power").textContent = power.toFixed(2);
 
     const max = Math.max(work, ke, pe, total, power);
-    document.getElementById("workBar").style.width = (work / max * 100) + "%";
-    document.getElementById("keBar").style.width = (ke / max * 100) + "%";
-    document.getElementById("peBar").style.width = (pe / max * 100) + "%";
-    document.getElementById("totalBar").style.width = (total / max * 100) + "%";
-    document.getElementById("powerBar").style.width = (power / max * 100) + "%";
+    document.getElementById("workBar").style.width = (work / max * 100 || 0) + "%";
+    document.getElementById("keBar").style.width = (ke / max * 100 || 0) + "%";
+    document.getElementById("peBar").style.width = (pe / max * 100 || 0) + "%";
+    document.getElementById("totalBar").style.width = (total / max * 100 || 0) + "%";
+    document.getElementById("powerBar").style.width = (power / max * 100 || 0) + "%";
 
     const msg = document.getElementById("energyMsg");
     if (total < 50) msg.textContent = "💤 Low Energy System";
