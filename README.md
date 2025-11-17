@@ -1,35 +1,55 @@
 # ⚡ Energy Analyzer
 
-*A web-based learning tool and calculator for understanding energy, work, and power.*
+*A web-based learning tool and calculator for understanding Work, Energy, and Power (WEP).*
+
+---
+
+## 🔗 Live Demo (Hosting Link)
+
+👉 **Access the project here:** *(https://iancthy.github.io/Energy-Analyzer/)*
+
+---
 
 ## 📘 Overview
 
-**Energy Analyzer** is an interactive web project developed for our **Physics Finals (PHY101)**.
-It helps users **learn, calculate, and analyze** fundamental physics concepts such as **Work, Power, and Energy**.
-The project includes a **learning section**, an **energy calculator**, and an **interactive quiz** — making it both **educational and engaging**.
+**Energy Analyzer** is an interactive web project developed for **PHY 101 – Calculus-Based Physics**.
+It helps users **learn, calculate, and analyze** key physics concepts such as **Work, Energy, and Power (WEP)** through a simple and engaging interface.
 
-This project is still **ongoing**, with more features and learning materials coming soon.
+The system includes:
+✔ A **Learning Section**
+✔ An **Energy Calculator**
+✔ A **Concept Quiz**
+
+These tools make learning more **interactive, visual, and self-paced**. The project is still **under development**, with several enhancements planned.
 
 ---
 
 ## 🧩 Features
 
-* 🧮 **Energy Calculator:** Computes Work, Power, Kinetic Energy, Potential Energy, and Total Energy.
-* 📘 **Learn Section:** Explains the concepts and formulas behind each computation.
-* 🧠 **Quiz Mode:** Tests your understanding of Work, Energy, and Power.
-* ▶️ **Video Integration:** Includes an educational video hosted on YouTube for deeper learning.
-* 💻 **Modern UI:** Clean, interactive design made with HTML, CSS, and JavaScript.
+* 🧮 **Energy Calculator** – Computes:
+
+  * Work
+  * Power
+  * Kinetic Energy
+  * Potential Energy
+  * Total Mechanical Energy
+
+* 📘 **Learn Section** – Provides simplified explanations of WEP concepts.
+
+* 🧠 **Quiz Mode** – Checks understanding through auto-scored questions.
+
+* 💻 **Modern UI** – Clean, responsive design using HTML, CSS, and JavaScript.
 
 ---
 
 ## 🚀 How to Use
 
-1. Open `index.html` in your browser.
-2. Choose between **Basic Mode** or **Advanced Mode**.
-3. Input values such as mass, velocity, height, distance, and time.
-4. Click **Calculate** to get results with animated visual bars.
-5. Visit the **Learn** tab to read explanations or watch the linked **YouTube video**.
-6. Try the **Quiz** section to test what you’ve learned!
+1. Open `index.html` or access the hosted link above.
+2. Choose **Basic Mode** or **Advanced Mode**.
+3. Provide values such as mass, height, velocity, distance, and time.
+4. Click **Calculate** to view animated results.
+5. Visit the **Learn** section for explanations.
+6. Take the **Quiz** to assess your understanding.
 
 ---
 
@@ -38,6 +58,7 @@ This project is still **ongoing**, with more features and learning materials com
 * **Work (W)** = Force × Distance
 * **Kinetic Energy (KE)** = ½ × m × v²
 * **Potential Energy (PE)** = m × g × h
+* **Total Energy (TE)** = KE + PE
 * **Power (P)** = Work ÷ Time
 
 ---
@@ -45,24 +66,20 @@ This project is still **ongoing**, with more features and learning materials com
 ## 🧑‍💻 Technologies Used
 
 * **HTML** – Structure
-* **CSS** – Design and Animation
-* **JavaScript** – Functionality and Interaction
+* **CSS** – Styling and layout
+* **JavaScript** – Functions, interactivity, and logic
 
 ---
 
-## 🧭 Status
+## 🧭 Project Status
 
-🚧 *Ongoing Development*
-Upcoming features:
+🚧 **Ongoing Development**
 
-* Enhanced quiz system
-* Progress tracking
-* Interactive simulations
-* Additional concept explanations
+Planned improvements include:
 
----
+* **Full mobile responsiveness** (scaling down UI for phones and tablets)
+* **Creation of an “About Us” page**
+* **Minor UI redesigns** for cleaner layout and improved user experience
+* **Better component alignment and spacing** across all sections
 
-## 🎥 YouTube Link
-
-📺 *Watch our explanation video here:* [**YouTube Video Link**](https://youtube.com/)
-*(Replace with your actual video link once uploaded.)*
+Just tell me!
