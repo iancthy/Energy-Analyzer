@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>E-Analyzer Quiz</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+body {
+    background: #05070d;
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #fff;
+}
+
+/* NAVBAR */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 25px;
+    padding: 10px 50px;
+    padding-left: 90px;
+    border-radius: 10px;
+}
+
+.navbar .logo-text {
+    display: inline-block;
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: 1px;
+    background: linear-gradient(90deg, #4d8bff 0%, #7db3ff 60%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+.navbar ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 40px;
+}
+
+.navbar a {
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 18px;
+    color: #ffffff;
+    transition: 0.3s;
+}
+
+.navbar a:hover {
+    color: #4d8bff;
+}
+
+/* INFORMATION SECTION */
+.info {
+    position: absolute;
+    top: 130px;
+    padding: 0;
+    margin: 20px auto 30px auto;
+    max-width: 600px; /* matched previous inline style */
+    margin-left: 120px;
+}
+
+.info h1 {
+    font-size: 30px;
+    font-weight: 700;
+    margin: 0 0 15px 0;
+    background: linear-gradient(135deg, #4d8bff 0%, #bbd7ff 50%, #4d8bff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.5px;
+}
+
+.info p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #e0e0e0;
+    margin: 0;
+    font-weight: 400;
+    letter-spacing: 0.2px;
+}
+/* QUIZ PANEL */
+.quiz-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* centers children horizontally */
+    position: absolute;
+    top: 50px;
+    right: 40px;
+    max-width: 720px;
+    margin: 40px auto;
+    border-radius: 20px;
+    padding: 15px 15px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+    backdrop-filter: blur(10px);
+    background: rgba(15, 20, 35, 0.75);
+    border: 2px solid rgba(255,255,255,0.08);
+}
+
+
+.quiz-container .question {
+    margin-bottom: 25px;
+    padding: 10px 30px 25px 30px; /* top, right, bottom, left */
+    border-radius: 15px;
+    background: rgba(77, 139, 255, 0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.quiz-container .question:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(77,139,255,0.2);
+}
+
+.quiz-container .question p {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+}
+
+.options label {
+    display: block;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.08);
+    cursor: pointer;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: #fff;
+    transition: all 0.25s;
+        user-select: none;       /* prevent text selection on click */
+    position: relative; 
+}
+.options label:hover {
+    background: rgba(77,139,255,0.15);
+    transform: translateY(-2px);
+}
+.options input { display: none; }
+.options input:checked + label {
+    background: linear-gradient(135deg, #4d8bff, #7db3ff);
+    color: #05070d;
+    border: none;
+}
+
+/* SUBMIT BUTTON */
+#submit-btn {
+    margin-top: 20px;
+    display: inline-block;
+    background: linear-gradient(135deg, #2d3a66 0%, #3d4a76 100%);
+      color: white;
+      border: 1px solid rgba(77, 139, 255, 0.3);
+    padding: 14px 32px;
+      border-radius: 10px;
+    cursor: pointer;
+      font-size: 15px;
+      font-weight: 600;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+      transition: all 0.3s ease;
+
+    
+}
+#submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+}
+#submit-btn:active { transform: scale(0.98); }
+
+.scrollable {
+    max-height: 500px; /* adjust height as needed */
+    overflow-y: auto; /* vertical scroll only */
+    padding-right: 10px; /* optional: avoids content hiding behind scrollbar */
+}
+
+/* Optional: nice thin scrollbar for modern look */
+.scrollable::-webkit-scrollbar {
+    width: 6px;
+}
+
+.scrollable::-webkit-scrollbar-thumb {
+    background: rgba(77,139,255,0.5);
+    border-radius: 3px;
+}
+
+/* RESULTS PANEL */
+.results-panel {
+  position: absolute;
+  top: 320px;
+  left: 250px;
+  max-width: 300px;       /* slightly narrower */
+  display: flex;
+  flex-direction: column;
+  gap: 4px;                /* minimal spacing */
+  cursor: move;
+  z-index: 1000;
+}
+
+/* Each result card - thin, compact */
+.results-panel .result-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;       /* very thin padding */
+  border-radius: 10px;
+  font-size: 0.85rem;      /* smaller text */
+  font-weight: 500;
+  color: #fff;
+  background: rgba(25, 35, 50, 0.35); /* translucent glass */
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 1px 6px rgba(0,0,0,0.15);
+  transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
+    min-height: 28px;      /* sets uniform height */
+  box-sizing: border-box;
+}
+
+.results-panel .result-row.correct {
+  background: linear-gradient(120deg, rgba(77,255,139,0.15), rgba(77,255,139,0.25));
+  color: #ffffff;
+  border: 1px solid rgba(77,255,139,0.35);
+}
+
+.results-panel .result-row.incorrect {
+  background: linear-gradient(120deg, rgba(255,77,139,0.15), rgba(255,77,139,0.25));
+  color: #ffffff;
+  border: 1px solid rgba(255,77,139,0.35);
+}
+
+.results-panel .result-row .icon {
+  font-size: 1em;   /* smaller icon */
+}
+
+.results-panel .result-row:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+}
+
+/* Total score */
+.total-score {
+  margin-top: 6px;
+  font-weight: bold;
+  font-size: 0.95rem;
+  color: #4d8bff;
+  text-align: center;
+}
+
+
+
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="logo-container"><span class="logo-text">E-Analyzer</span></div>
+  <ul>
+      <li><a href="main.html">Basic Mode</a></li>
+      <li><a href="advance.html">Advanced Mode</a></li>
+      <li><a href="learn.html">Learn</a></li>
+      <li><a href="quiz.html">Quiz</a></li>
+      <li><a href="about.html">About</a></li>
+  </ul>
+</nav>
+
+<div class="info">
+    <h1>Energy Quiz</h1>
+    <p>Test your knowledge of energy, physics, and formulas. Select the best answer for each question.</p>
+</div>
+
+
+<div class="quiz-panel">
+  <div class="quiz-container scrollable">
+    <div id="quiz-box"></div>
+  </div>
+  <button id="submit-btn">Submit Answers</button>
+</div>
+
+<div class="results-panel" id="results-bar">
+  <!-- Result rows injected here -->
+</div>
+
+
+<script>   
+const questions = [
+  { q: "What is the SI unit of force?", o: ["Joule", "Newton", "Pascal", "Watt"], a: "Newton" },
+  { q: "What is the acceleration due to gravity on Earth?", o: ["8.9 m/s²", "9.8 m/s²", "10 m/s²", "7.8 m/s²"], a: "9.8 m/s²" },
+  { q: "Energy is measured in?", o: ["Newton", "Pascal", "Joule", "Watt"], a: "Joule" },
+  { q: "Power is equal to?", o: ["Work / Time", "Force × Distance", "Mass × Velocity", "Energy / Force"], a: "Work / Time" },
+  { q: "Which law states 'Every action has an equal and opposite reaction'?", o: ["Newton's 1st Law", "Newton's 2nd Law", "Newton's 3rd Law", "Law of Inertia"], a: "Newton's 3rd Law" },
+  { q: "What is the SI unit of energy?", o: ["Joule", "Watt", "Newton", "Meter"], a: "Joule" },
+  { q: "What is kinetic energy formula?", o: ["mv²", "½mv²", "mgh", "F×d"], a: "½mv²" },
+  { q: "What is potential energy formula?", o: ["½mv²", "mgh", "F×d", "p×v"], a: "mgh" },
+  { q: "Which quantity is a vector?", o: ["Speed", "Mass", "Distance", "Velocity"], a: "Velocity" },
+  { q: "What is the SI unit of pressure?", o: ["Joule", "Newton", "Pascal", "Watt"], a: "Pascal" }
+];
+
+const selected = questions.sort(() => 0.5 - Math.random()).slice(0, 10);
+const quizBox = document.getElementById("quiz-box");
+const resultsBar = document.getElementById("results-bar");
+
+// Quiz questions
+selected.forEach((item, i) => {
+  const opts = item.o.map((o, idx) => `
+    <input type="radio" id="q${i}_${idx}" name="q${i}" value="${o}">
+    <label for="q${i}_${idx}">${o}</label>
+  `).join("");
+  quizBox.innerHTML += `<div class="question"><p><b>Q${i + 1}:</b> ${item.q}</p><div class="options">${opts}</div></div>`;
+});
+
+// Results panel
+function initResultsBar() {
+  resultsBar.innerHTML = "";
+  selected.forEach((_, i) => {
+    const row = document.createElement("div");
+    row.className = "result-row pending";
+    row.innerHTML = `<span class='icon'>⬜</span> Q${i+1}: <span class='pending-text'>Not answered</span>`;
+    resultsBar.appendChild(row);
+  });
+  const total = document.createElement("div");
+  total.className = "total-score";
+  total.textContent = `Total Score: —`;
+  resultsBar.appendChild(total);
+}
+initResultsBar();
+
+// Submit answers
+document.getElementById("submit-btn").addEventListener("click", () => {
+  let score = 0;
+  const rows = resultsBar.querySelectorAll('.result-row');
+  rows.forEach((row, i) => {
+    const selectedOption = document.querySelector(`input[name="q${i}"]:checked`);
+    const correct = selectedOption && selectedOption.value === selected[i].a;
+    if (correct) score++;
+    row.className = "result-row " + (correct ? "correct" : "incorrect");
+    row.innerHTML = `<span class='icon'>${correct ? "✔️" : "❌"}</span> Q${i+1}: <span>${correct ? "Correct" : "Incorrect"}</span>`;
+  });
+  resultsBar.querySelector('.total-score').textContent = `Total Score: ${score} / ${selected.length}`;
+  const result = document.getElementById("result");
+  result.textContent = `You scored ${score} / ${selected.length}`;
+  result.classList.add('show');
+});
+</script>
+</body>
+</html>
