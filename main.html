@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Energy Analyzer</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+  <style>
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+    body {
+      background: #05070d;
+      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #fff;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 25px;
+      padding: 10px 50px 10px 90px;
+      border-radius: 10px;
+    }
+
+    .navbar .logo-text {
+      font-weight: 800;
+      font-size: 22px;
+      letter-spacing: 1px;
+      background: linear-gradient(90deg, #4d8bff 0%, #7db3ff 60%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .navbar ul {
+      display: flex;
+      list-style: none;
+      gap: 40px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar a {
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 18px;
+      color: #ffffff;
+      transition: 0.3s;
+    }
+
+    .navbar a:hover {
+      color: #4d8bff;
+    }
+
+    /* INFORMATION SECTION */
+    .info {
+      position: absolute;
+      top: 130px;
+      left: 40px;
+      max-width: 800px;
+      margin: 20px auto 30px auto;
+    }
+
+    .info h1 {
+      font-size: 30px;
+      font-weight: 700;
+      margin: 0 0 15px 0;
+      background: linear-gradient(135deg, #4d8bff 0%, #bbd7ff 50%, #4d8bff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.5px;
+    }
+
+    .info p {
+      font-size: 14px;
+      line-height: 1.8;
+      color: #e0e0e0;
+      margin: 0;
+      font-weight: 400;
+      letter-spacing: 0.2px;
+    }
+
+    /* INPUT PANEL */
+    .input-wrapper {
+      position: absolute;
+      top: 285px;
+      left: 180px;
+      width: 50%;
+      justify-content: center;
+      flex: 1;
+    }
+
+    .input {
+      color: #ffffff;
+      border-radius: 15px;
+      padding: 40px;
+      width: 350px;
+      text-align: center;
+    }
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    .input form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 20px;
+      row-gap: 10px;
+      align-items: center;
+      justify-items: center;
+    }
+
+    .input label {
+      font-weight: 600;
+      margin-top: 5px;
+      display: block;
+      text-align: center;
+      font-size: 14px;
+      color: #ffffff;
+      letter-spacing: 0.5px;
+    }
+
+    .input input {
+      width: 90%;
+      padding: 12px;
+      margin-top: 6px;
+      border: 1.5px solid #4d8bff4d;
+      border-radius: 10px;
+      font-size: 15px;
+      background-color: #19223099;
+      color: #ffffff;
+      text-align: center;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    .input input:focus {
+      outline: none;
+      border-color: #4d8bff;
+      background-color: rgba(25, 34, 48, 0.9);
+      box-shadow: 0 0 15px rgba(77, 139, 255, 0.3);
+    }
+
+    .input input::placeholder {
+      color: rgba(224, 224, 224, 0.5);
+      font-weight: 400;
+    }
+
+    .input .time-group {
+      grid-column: span 2;
+      text-align: center;
+      margin-top: 0px;
+    }
+
+    .input .time-group input {
+      margin-top: -10px;
+      width: 60%;
+      text-align: center;
+    }
+
+    .buttons {
+      grid-column: span 2;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 5px;
+    }
+
+    .buttons button {
+      background: linear-gradient(135deg, #2d3a66 0%, #3d4a76 100%);
+      color: white;
+      border: 1px solid rgba(77, 139, 255, 0.3);
+      padding: 12px 24px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      letter-spacing: 0.5px;
+    }
+
+    .buttons button:hover {
+      background: linear-gradient(135deg, #3d4a76 0%, #4d5a86 100%);
+      border-color: #4d8bff;
+      box-shadow: 0 0 15px rgba(77, 139, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .reset-btn {
+      background: linear-gradient(135deg, #4d8bff 0%, #7db3ff 100%);
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .reset-btn:hover {
+      box-shadow: 0 0 20px rgba(77, 139, 255, 0.5);
+      background: linear-gradient(135deg, #7db3ff 0%, #4d8bff 100%);
+    }
+
+    /* RESULT PANEL */
+    .result-wrapper {
+      position: absolute;
+      top: 140px;
+      right: 150px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      width: fit-content;
+    }
+
+    .result {
+      margin: 0;
+      padding: 60px;
+      width: 400px;
+      border-radius: 70px;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      background:
+        radial-gradient(circle at 1% 1%, #4d8bffb3 0%, rgba(39,83,199,0.4) 25%, rgba(18,32,58,0) 60%),
+        radial-gradient(circle at 40% 35%, rgba(77,139,255,0.25) 0%, rgba(39,83,199,0.1) 40%, rgba(0,0,0,0) 80%),
+        linear-gradient(to bottom right, #000e2e, #000e2e);
+      background-blend-mode: screen, screen, normal;
+    }
+
+    .bar-container {
+      height: 20px;
+      background: rgba(0,0,0,0.4);
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 5px 0 15px 0;
+      width: 100%;
+    }
+
+    .bar {
+      height: 100%;
+      width: 0%;
+      background: #4d8bff;
+      transition: width 0.8s ease-in-out;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .input,
+      .result {
+        width: 100%;
+        max-width: 400px;
+      }
+      .navbar {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px 20px;
+      }
+      .navbar ul {
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+      }
+      .input form {
+        grid-template-columns: 1fr;
+      }
+      .input .time-group input {
+        width: 80%;
+      }
+      .buttons {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo-container">
+      <span class="logo-text">E-Analyzer</span>
+    </div>
+    <ul>
+      <li><a href="main.html">Basic Mode</a></li>
+      <li><a href="advance.html">Advanced Mode</a></li>
+      <li><a href="learn.html">Learn</a></li>
+      <li><a href="quiz.html">Quiz</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+
+  <!-- Information -->
+     <div class="info" style="margin-left: 80px; max-width: 600px;">
+    <h1>Energy Calculator</h1>
+   <p>  Compute work, kinetic energy, potential energy, total energy, and power. 
+  Enter values for mass, velocity, height, distance, and time to see results with visual bars. 
+  Explore how changing each value affects energy outcomes instantly.
+
+</p>
+  </div>
+
+
+    <!-- Input Section Wrapper -->
+    <div class="input-wrapper">
+      <div class="input">
+        <form>
+          <div>
+            <label>Mass (kg):</label>
+            <input type="number" id="mass" placeholder="e.g. 2.5" />
+          </div>
+          <div>
+            <label>Velocity (m/s):</label>
+            <input type="number" id="velocity" placeholder="e.g. 4" />
+          </div>
+          <div>
+            <label>Height (m):</label>
+            <input type="number" id="height" placeholder="e.g. 3" />
+          </div>
+          <div>
+            <label>Distance (m):</label>
+            <input type="number" id="distance" placeholder="e.g. 10" />
+          </div>
+          <div class="time-group">
+            <label>Time (s):</label><br>
+            <input type="number" id="time" placeholder="e.g. 5" />
+          </div>
+          <div class="buttons">
+            <button type="button" onclick="calculateEnergy()">Calculate</button>
+            <button type="button" class="reset-btn" onclick="resetForm()">Reset</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Result Section Wrapper -->
+    <div class="result-wrapper">
+      <div class="result">
+        <p><b>Work (W):</b> <span id="work">0</span> J</p>
+        <div class="bar-container"><div id="workBar" class="bar"></div></div>
+
+        <p><b>Kinetic Energy (KE):</b> <span id="ke">0</span> J</p>
+        <div class="bar-container"><div id="keBar" class="bar"></div></div>
+
+        <p><b>Potential Energy (PE):</b> <span id="pe">0</span> J</p>
+        <div class="bar-container"><div id="peBar" class="bar"></div></div>
+
+        <p><b>Total Energy:</b> <span id="total">0</span> J</p>
+        <div class="bar-container"><div id="totalBar" class="bar"></div></div>
+
+        <p><b>Power:</b> <span id="power">0</span> W</p>
+        <div class="bar-container"><div id="powerBar" class="bar"></div></div>
+
+      </div>
+    </div>
+
+  <script>
+function calculateEnergy() {
+  // Get values; default to 0 if empty
+  const m = parseFloat(document.getElementById("mass").value) || 0;
+  const v = parseFloat(document.getElementById("velocity").value) || 0;
+  const h = parseFloat(document.getElementById("height").value) || 0;
+  const d = parseFloat(document.getElementById("distance").value) || 0;
+  let t = parseFloat(document.getElementById("time").value) || 0;
+  const g = 9.81;
+
+  // Prevent division by zero for power
+  if (t <= 0) t = 1; // default time to 1 second if empty or zero
+
+  const ke = 0.5 * m * v * v;
+  const pe = m * g * h;
+  const work = m * g * d;
+  const total = ke + pe;
+  const power = work / t;
+
+  document.getElementById("ke").textContent = ke.toFixed(4);
+  document.getElementById("pe").textContent = pe.toFixed(4);
+  document.getElementById("work").textContent = work.toFixed(4);
+  document.getElementById("total").textContent = total.toFixed(4);
+  document.getElementById("power").textContent = power.toFixed(4);
+
+  const max = Math.max(work, ke, pe, total, power);
+  document.getElementById("workBar").style.width = (work / max * 100 || 0) + "%";
+  document.getElementById("keBar").style.width = (ke / max * 100 || 0) + "%";
+  document.getElementById("peBar").style.width = (pe / max * 100 || 0) + "%";
+  document.getElementById("totalBar").style.width = (total / max * 100 || 0) + "%";
+  document.getElementById("powerBar").style.width = (power / max * 100 || 0) + "%";
+}
+
+function resetForm() {
+  document.querySelectorAll("input").forEach(i => i.value = "");
+  document.querySelectorAll(".bar").forEach(b => b.style.width = "0%");
+  document.getElementById("work").textContent =
+  document.getElementById("ke").textContent =
+  document.getElementById("pe").textContent =
+  document.getElementById("total").textContent =
+  document.getElementById("power").textContent = "0";
+
+}
+
+  </script>
+</body>
+</html>
