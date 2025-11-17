@@ -6,7 +6,7 @@
 
 ## 🔗 Live Demo (Hosting Link)
 
-👉 **Access the project here:** *(https://iancthy.github.io/Energy-Analyzer/)*
+👉 **Access the project here:** *https://iancthy.github.io/Energy-Analyzer/*
 
 ---
 
