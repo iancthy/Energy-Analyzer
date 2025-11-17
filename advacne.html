@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Energy Analyzer – Advanced Mode</title>
+  <style>
+    html, body {
+      height: 100%;
+      overflow: auto;
+      margin: 0;
+      padding: 0;
+      background: #05070d;
+      font-family: 'Montserrat', sans-serif;
+      color: #fff;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 25px;
+      padding: 10px 50px;
+      padding-left: 90px;
+      border-radius: 10px;
+    }
+
+    .navbar .logo-text {
+      font-weight: 800;
+      font-size: 22px;
+      letter-spacing: 1px;
+      background: linear-gradient(90deg, #4d8bff 0%, #7db3ff 60%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .navbar ul {
+      display: flex;
+      list-style: none;
+      gap: 40px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar a {
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 18px;
+      color: #ffffff;
+      transition: 0.3s;
+    }
+
+    .navbar a:hover {
+      color: #4d8bff;
+    }
+
+    /* INFORMATION SECTION */
+    .info {
+      position: absolute;
+      top: 130px;
+      left: 40px;
+      max-width: 800px;
+      margin: 20px auto 30px auto;
+    }
+
+    .info h1 {
+      font-size: 30px;
+      font-weight: 700;
+      margin: 0 0 15px 0;
+      background: linear-gradient(135deg, #4d8bff 0%, #bbd7ff 50%, #4d8bff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.5px;
+    }
+
+    .info p {
+      font-size: 14px;
+      line-height: 1.8;
+      color: #e0e0e0;
+      margin: 0;
+      font-weight: 400;
+      letter-spacing: 0.2px;
+    }
+
+    /* INPUT PANEL */
+    .input {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      top: 270px;
+      left: 180px;
+      color: #ffffff;
+      border-radius: 15px;
+      padding: 30px;
+      width: 350px;
+    }
+
+    select, input {
+      width: 95%;
+      padding: 12px 16px;
+      margin-top: 8px;
+      border-radius: 10px;
+      border: 1.5px solid #4d8bff4d;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 16px;
+      background-color: #19223099;
+      color: #ffffff;
+      font-weight: 500;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      box-sizing: border-box;
+      text-align: center;
+    }
+
+    select:focus, input:focus {
+      outline: none;
+      border-color: #7db3ff;
+      box-shadow: 0 0 0 2px #4d8bff44;
+    }
+
+    select {
+      appearance: none;
+      background-image: linear-gradient(90deg, #4d8bff 0%, #7db3ff 100%);
+      background-size: 0 2px, 100% 100%;
+      background-repeat: no-repeat;
+      background-position: bottom left, top left;
+    }
+
+    select option {
+      background: #192230;
+      color: #ffffff;
+      font-weight: 500;
+    }
+
+    .input input:focus {
+      border-color: #4d8bff;
+      background-color: rgba(25, 34, 48, 0.9);
+      box-shadow: 0 0 15px rgba(77, 139, 255, 0.3);
+    }
+
+    .input input::placeholder {
+      color: rgba(224, 224, 224, 0.5);
+      font-weight: 400;
+    }
+
+    label {
+      font-weight: 500;
+      margin-top: 10px;
+      display: block;
+    }
+
+    button, .reset-btn {
+      background: linear-gradient(135deg, #2d3a66 0%, #3d4a76 100%);
+      color: white;
+      border: 1px solid rgba(77, 139, 255, 0.3);
+      margin-top: 20px;
+      padding: 12px 24px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      letter-spacing: 0.5px;
+    }
+
+    button:hover {
+      background: linear-gradient(135deg, #3d4a76 0%, #4d5a86 100%);
+      border-color: #4d8bff;
+      box-shadow: 0 0 15px rgba(77, 139, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .reset-btn:hover {
+      filter: brightness(0.95);
+      box-shadow: 0 6px 18px rgba(77,139,255,0.18);
+    }
+
+    /* RESULT PANEL */
+    .result {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: absolute;
+      top: 250px;
+      right: 150px;
+      padding: 40px;
+      width: 420px;
+      border-radius: 40px;
+      font-size: 16px;
+      background:
+        radial-gradient(circle at 1% 1%, #4d8bffb3 0%, rgba(39,83,199,0.4) 25%, rgba(18,32,58,0) 60%),
+        radial-gradient(circle at 40% 35%, rgba(77,139,255,0.25) 0%, rgba(39,83,199,0.1) 40%, rgba(0,0,0,0) 80%),
+        linear-gradient(to bottom right, #000e2e, #000e2e);
+      background-blend-mode: screen, screen, normal;
+      box-shadow: 0 20px 60px rgba(13,22,40,0.6);
+    }
+
+    .result p {
+      margin: 10px 0;
+    }
+
+    .bar-container {
+      height: 20px;
+      background: rgba(0,0,0,0.4);
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 5px 0 15px 0;
+      width: 100%;
+    }
+
+    .bar {
+      height: 100%;
+      width: 0%;
+      background: #4d8bff;
+      transition: width 0.8s ease-in-out;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+      }
+      .input, .result {
+        width: 100%;
+        max-width: 400px;
+      }
+    }
+
+    #inputs-area {
+      width: 100%;
+      text-align: center;
+      margin-top: 5px;
+    }
+
+    #inputs-area label {
+      display: block;
+      width: 100%;
+      text-align: center;
+      margin-bottom: 5px;
+    }
+
+    #inputs-area input {
+      width: 200px;
+      text-align: center;
+    }
+
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none; 
+      margin: 0; 
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo-container">
+      <span class="logo-text">E-Analyzer</span>
+    </div>
+    <ul>
+      <li><a href="main.html">Basic Mode</a></li>
+      <li><a href="advance.html">Advanced Mode</a></li>
+      <li><a href="learn.html">Learn</a></li>
+      <li><a href="quiz.html">Quiz</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+
+  <!-- Info Section -->
+  <div class="info" style="margin-left: 80px; max-width: 600px;">
+    <h1>Energy Calculator</h1>
+    <p>
+      This mode allows you to calculate specific energy-related quantities — such as work, power,
+      force, mass, or distance — by selecting what you want to find and entering known values.
+    </p>
+  </div>
+
+  <!-- Left: Inputs -->
+  <div class="input">
+    <label for="find">Select what to find:</label>
+    <select id="find" onchange="updateInputs()">
+      <option value="">Select…</option>
+      <option value="work">Find Work</option>
+      <option value="power">Find Power</option>
+      <option value="velocity">Find Velocity</option>
+      <option value="height">Find Height</option>
+      <option value="mass">Find Mass</option>
+      <option value="energy">Find Energy</option>
+      <option value="force">Find Force</option>
+      <option value="distance">Find Distance</option>
+      <option value="time">Find Time</option>
+    </select>
+
+    <div id="inputs-area"></div>
+    <div class="actions" style="display:flex; gap:12px; justify-content:center; width:100%;">
+      <button onclick="calculate()">Calculate</button>
+      <button class="reset-btn" type="button" onclick="resetAdvanced()">Reset</button>
+    </div>
+  </div>
+
+  <!-- Right: Results -->
+  <div class="result">
+    <h2>Result</h2>
+    <p><span id="result">0</span> <span id="unit">—</span></p>
+    <div class="bar-container"><div class="bar" id="resultBar"></div></div>
+  </div>
+
+  <script>
+    function updateInputs() {
+      const mode = document.getElementById("find").value;
+      const area = document.getElementById("inputs-area");
+      area.innerHTML = "";
+
+      const addInput = (id, label, unit) => {
+        area.innerHTML += `
+          <label>${label} (${unit}):</label>
+          <input type="number" id="${id}" placeholder="Enter ${label.toLowerCase()}">
+        `;
+      };
+
+      switch(mode) {
+        case "work": addInput("force", "Force", "N"); addInput("distance", "Distance", "m"); break;
+        case "power": addInput("work", "Work", "J"); addInput("time", "Time", "s"); break;
+        case "velocity": addInput("power", "Power", "W"); addInput("force", "Force", "N"); break;
+        case "height": addInput("pe", "Potential Energy", "J"); addInput("mass", "Mass", "kg"); break;
+        case "mass": addInput("energy", "Energy", "J"); addInput("velocity", "Velocity", "m/s"); break;
+        case "energy": addInput("mass", "Mass", "kg"); addInput("velocity", "Velocity", "m/s"); break;
+        case "force": addInput("work", "Work", "J"); addInput("distance", "Distance", "m"); break;
+        case "distance": addInput("work", "Work", "J"); addInput("force", "Force", "N"); break;
+        case "time": addInput("work", "Work", "J"); addInput("power", "Power", "W"); break;
+      }
+    }
+
+    function calculate() {
+      const mode = document.getElementById("find").value;
+      let result = 0;
+      let unit = "";
+
+      const val = id => parseFloat(document.getElementById(id)?.value) || 0;
+
+      switch(mode) {
+        case "work": result = val("force") * val("distance"); unit = "J"; break;
+        case "power": result = val("work") / val("time"); unit = "W"; break;
+        case "velocity": result = val("power") / val("force"); unit = "m/s"; break;
+        case "height": result = val("pe") / (val("mass") * 9.81); unit = "m"; break;
+        case "mass": result = (2 * val("energy")) / (val("velocity")**2); unit = "kg"; break;
+        case "energy": result = 0.5 * val("mass") * (val("velocity")**2); unit = "J"; break;
+        case "force": result = val("work") / val("distance"); unit = "N"; break;
+        case "distance": result = val("work") / val("force"); unit = "m"; break;
+        case "time": result = val("work") / val("power"); unit = "s"; break;
+      }
+
+      document.getElementById("result").textContent = result.toFixed(4);
+      document.getElementById("unit").textContent = unit;
+      document.getElementById("resultBar").style.width = Math.min(result / 1000 * 100, 100) + "%";
+    }
+
+    function resetAdvanced() {
+      document.getElementById('find').value = '';
+      document.getElementById('inputs-area').innerHTML = '';
+      document.getElementById('result').textContent = '0';
+      document.getElementById('unit').textContent = '—';
+      document.getElementById('resultBar').style.width = '0%';
+    }
+  </script>
+</body>
+</html>
