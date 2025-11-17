@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>E-Analyzer Panels</title>
+
+  <style>
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+      font-family: "Montserrat", sans-serif;
+      background: #05070d;
+      color: #fff;
+    }
+
+    /* NAVBAR */
+        .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 25px;
+      padding: 10px 50px;
+      padding-left: 90px;
+      border-radius: 10px;
+    }
+
+    .navbar .logo-text {
+      display: inline-block;
+      font-weight: 800;
+      font-size: 22px;
+      letter-spacing: 1px;
+      background: linear-gradient(90deg, #4d8bff 0%, #7db3ff 60%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+
+    }
+
+    .navbar ul {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      gap: 40px;
+    }
+
+    .navbar a {
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 18px;
+      color: #ffffff;
+      transition: 0.3s;
+    }
+
+    .navbar a:hover {
+      color: #4d8bff;
+    }
+
+        .info {
+      position: absolute;
+      top: 130px;
+      left: 40px;
+      padding: 0;
+      margin: 20px auto 30px auto;
+        width: 500px; /* change this to whatever you want */
+    }
+
+    .info h1 {
+      font-size: 30px;
+      font-weight: 700;
+      margin: 0 0 15px 0;
+      background: linear-gradient(135deg, #4d8bff 0%, #bbd7ff 50%, #4d8bff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.5px;
+    }
+
+    .info p {
+      font-size: 14px;
+      line-height: 1.8;
+      color: #e0e0e0;
+      margin: 0;
+      font-weight: 400;
+      letter-spacing: 0.2px;
+    }
+    /* BUTTONS */
+    .upbuttom {
+      display: block;
+      list-style: none;
+    }
+
+    .up {
+  background: linear-gradient(135deg, #16387A, #1d4fb8); 
+  color: #ffffff;
+  border: 2px solid #ffffff; /* whitish outline */
+  
+  padding: 5px 22px;
+  font-size: 15px;
+    font-weight: 600;
+
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: "Montserrat", sans-serif;
+
+  /* modern smooth animation */
+  transition: all 0.25s ease;
+
+  /* soft glow to pop on dark bg */
+  box-shadow: 0 0 10px rgba(22, 56, 122, 0.25);
+    }
+
+    .up:hover {
+  background: linear-gradient(135deg, #1d4fb8, #2966e3);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(41, 102, 227, 0.45);
+  border-color: rgba(255, 255, 255, 0.6);
+    }
+
+    .up:active {
+    transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(41, 102, 227, 0.3);
+}
+
+    /* PANELS */
+  .panel {
+  position: fixed;
+  top: 100px;
+  right: 40px;
+
+  width: 430px;
+  height: 75vh;
+
+  background: rgba(15, 20, 35, 0.65);
+  backdrop-filter: blur(12px);
+
+  border: 2px solid rgba(255,255,255,0.15);
+  border-radius: 18px;
+
+  padding: 25px;
+  color: white;
+
+  overflow-y: auto;
+  box-shadow: 0 0 20px rgba(0,0,0,0.35);
+
+  /* panels are kept as hidden content sources */
+  display: none;
+}
+
+  /* Single right-side info box that displays selected topic */
+  .info-panel {
+    position: fixed;
+    top: 100px;
+    right: 40px;
+    width: 750px;
+    height: 75vh;
+    background: rgba(15, 20, 35, 0.75);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.08);
+    border-radius: 18px;
+    padding: 20px 22px;
+    color: #fff;
+    overflow-y: auto;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.45);
+    display: block;
+  }
+
+  .info-panel h2 { color: #4d8bff; margin-top: 6px; }
+  .info-panel .example { margin-top: 10px; color: #dfefff; }
+
+    .panel.active {
+      right: 0;
+    }
+
+    .panel h2 {
+      color: #ffcd00;
+      margin-top: 20px;
+    }
+
+    .closeBtn {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 22px;
+      cursor: pointer;
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      transition: 0.2s;
+    }
+
+    .closeBtn:hover {
+      color: #ffcd00;
+    }
+    /* LOWER BUTTONS */
+    /* Column of buttons (combined upper + lower) */
+    .button-column {
+      position: absolute;
+      top: 350px;
+      left: 229px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      align-items: center;
+
+    }
+
+  </style>
+</head>
+
+<body>
+  <!-- NAVBAR -->
+ <nav class="navbar">
+    <div class="logo-container">
+      <span class="logo-text">E-Analyzer</span>
+    </div>
+    <ul>
+      <li><a href="main.html">Basic Mode</a></li>
+      <li><a href="advance.html">Advanced Mode</a></li>
+      <li><a href="learn.html">Learn</a></li>
+      <li><a href="quiz.html">Quiz</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+
+
+       <div class="info" style="margin-left: 80px; max-width: 600px;">
+    <h1>Energy Calculator</h1>
+   <p>  Compute work, kinetic energy, potential energy, total energy, and power. 
+  Enter values for mass, velocity, height, distance, and time to see results with visual bars. 
+  Explore how changing each value affects energy outcomes instantly.
+
+</p>
+  </div>
+
+
+  <!-- PANELS -->
+  <div id="panel1" class="panel">
+    <button class="closeBtn">✕</button>
+    <h2>Energy Basics</h2>
+    <p>🟩 Energy is the capacity to do work — it makes things move or change.
+      <br><br>Key Types: Kinetic Energy (KE) and Potential Energy (PE).
+      <br>Formulas:<br>PE = mgh<br>KE = ½mv²<br><br>
+      Example: A roller coaster at the top of a hill has high PE. As it goes down, PE turns into KE.
+    </p>
+  </div>
+
+  <div id="panel2" class="panel">
+    <button class="closeBtn">✕</button>
+    <h2>Work</h2>
+    <p>💪 Work is the transfer of energy that occurs when a force causes movement.
+      <br><br>Formula: W = F × d
+      <br>Unit: Joule (J)
+      <br><br>Example: If a 50 N force moves an object 3 m, W = 150 J.
+    </p>
+  </div>
+
+  <div id="panel3" class="panel">
+    <button class="closeBtn">✕</button>
+    <h2>Efficiency</h2>
+    <p>⚙️ Efficiency measures how effectively energy is converted to useful work.
+      <br><br>Formula: η = (Output / Input) × 100%
+      <br><br>Example: If a machine uses 200 J and outputs 150 J of work,
+      its efficiency is 75%.
+    </p>
+  </div>
+
+  <div id="panel4" class="panel">
+    <button class="closeBtn">✕</button>
+    <h2>E-Analyzer</h2>
+    <p>📊 The Energy Analyzer calculates Work, Energy, Power, and Efficiency.
+      <br><br>It helps visualize how energy changes forms in real-time and
+      how different factors affect efficiency.
+    </p>
+  </div>
+
+  <div class="button-column">
+    <button class="up" data-panel="panel1">Energy Basics</button>
+    <button class="up" data-panel="panel-energy">Types of Energy: PE & KE</button>
+    <button class="up" data-panel="panel2">Work</button>
+    <button class="up" data-panel="panel-power">Power</button>
+    <button class="up" data-panel="panel3">Efficiency</button>
+    <button class="up" data-panel="panel-apps">Real-life Applications</button>
+    <a href="quizmain.html"><button class="up">Quiz</button></a>
+  </div>
+
+<!-- SINGLE INFO BOX (shows content based on selection) -->
+<div id="learn-box" class="info-panel" aria-live="polite">
+  <h2>Learn</h2>
+  <div id="learn-content">
+    <p>Select a topic on the left to see a concise explanation, formula, and example here.</p>
+  </div>
+</div>
+
+<!-- PANELS (all slide from right) -->
+<div id="panel-energy" class="panel">
+  <button class="closeBtn">✕</button>
+  <h2>Types of Energy</h2>
+  <p>
+    <b>Kinetic Energy (KE):</b> Energy due to motion.<br>
+    <b>Potential Energy (PE):</b> Energy due to height or position.<br>
+    Example: Roller coaster at top of hill → high PE, going down → KE.
+  </p>
+</div>
+
+<div id="panel-power" class="panel">
+  <button class="closeBtn">✕</button>
+  <h2>Power</h2>
+  <p>
+    Power is the rate at which work is done or energy is used.<br>
+    Formula: P = W / t or P = F × v<br>
+    Example: Faster you climb stairs → more power exerted.
+  </p>
+</div>
+
+<div id="panel-apps" class="panel">
+  <button class="closeBtn">✕</button>
+  <h2>Real-life Applications</h2>
+  <p>
+    <ul>
+      <li>Lifting a backpack → Work & PE</li>
+      <li>Moving car → KE</li>
+      <li>Electric fan → Rotational KE & Power</li>
+      <li>Climbing stairs → Work & Power</li>
+    </ul>
+  </p>
+</div>
+
+  <!-- SCRIPT -->
+<script>
+  // Replace sliding panels with a single info box.
+  // Clicking any .up or .down button will display the corresponding panel's content
+  // inside the right-side #learn-box. The original panel elements remain as
+  // hidden content sources (so their text can be reused).
+
+  const buttons = document.querySelectorAll('.up, .down');
+  const learnContent = document.getElementById('learn-content');
+
+  function updateLearnInfo(panelId) {
+    if (!panelId) return;
+    const src = document.getElementById(panelId);
+    if (!src) return;
+
+    // Extract title and paragraph content from the source panel, ignoring close button
+    const titleEl = src.querySelector('h2');
+    const paraEl = src.querySelector('p');
+
+    let html = '';
+    if (titleEl) html += `<h2>${titleEl.textContent}</h2>`;
+    if (paraEl) html += `<div class="example">${paraEl.innerHTML}</div>`;
+
+    learnContent.innerHTML = html || '<p>Select a topic to learn more.</p>';
+  }
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.panel;
+      updateLearnInfo(target);
+    });
+  });
+</script>
+</body>
+</html>
