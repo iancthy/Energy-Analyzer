@@ -282,15 +282,14 @@
 <body>
   <!-- Navbar -->
   <nav class="navbar">
-    <div class="logo-container">
+    <div class="logo-conta  iner">
       <span class="logo-text">E-Analyzer</span>
     </div>
     <ul>
-      <li><a href="index.html">Basic Mode</a></li>
-      <li><a href="advance.html">Advanced Mode</a></li>
-      <li><a href="learn.html">Learn</a></li>
-      <li><a href="quiz.html">Quiz</a></li>
-      <li><a href="about.html">About</a></li>
+      <li><a href="energymain.html">Basic Mode</a></li>
+      <li><a href="advancemain.html">Advanced Mode</a></li>
+      <li><a href="learnmain.html">Learn</a></li>
+      <li><a href="quiz4.html">Quiz</a></li>
     </ul>
   </nav>
 
@@ -360,30 +359,36 @@
 
   <script>
 function calculateEnergy() {
-  // Get values; default to 0 if empty
+  // Get values from input fields. If empty, default to 0 using "|| 0"
   const m = parseFloat(document.getElementById("mass").value) || 0;
   const v = parseFloat(document.getElementById("velocity").value) || 0;
   const h = parseFloat(document.getElementById("height").value) || 0;
   const d = parseFloat(document.getElementById("distance").value) || 0;
   let t = parseFloat(document.getElementById("time").value) || 0;
-  const g = 9.81;
+  const g = 9.81; // constant gravitational acceleration
 
-  // Prevent division by zero for power
-  if (t <= 0) t = 1; // default time to 1 second if empty or zero
+  // Prevent division by zero for power (power = work / time)
+  // If time is 0 or empty, set it to 1 second
+  if (t <= 0) t = 1;
 
-  const ke = 0.5 * m * v * v;
-  const pe = m * g * h;
-  const work = m * g * d;
-  const total = ke + pe;
-  const power = work / t;
+  // Compute energy values using physics formulas
+  const ke = 0.5 * m * v * v;  // kinetic energy formula
+  const pe = m * g * h;        // potential energy formula
+  const work = m * g * d;      // work done = force * distance
+  const total = ke + pe;       // total mechanical energy
+  const power = work / t;      // power formula
 
+  // Display computed values on the page (rounded to 4 decimals)
   document.getElementById("ke").textContent = ke.toFixed(4);
   document.getElementById("pe").textContent = pe.toFixed(4);
   document.getElementById("work").textContent = work.toFixed(4);
   document.getElementById("total").textContent = total.toFixed(4);
   document.getElementById("power").textContent = power.toFixed(4);
 
+  // Find the highest value so the bars scale proportionally
   const max = Math.max(work, ke, pe, total, power);
+
+  // Update bar widths (percentage relative to the max value)
   document.getElementById("workBar").style.width = (work / max * 100 || 0) + "%";
   document.getElementById("keBar").style.width = (ke / max * 100 || 0) + "%";
   document.getElementById("peBar").style.width = (pe / max * 100 || 0) + "%";
@@ -392,14 +397,18 @@ function calculateEnergy() {
 }
 
 function resetForm() {
+  // Clear all input fields
   document.querySelectorAll("input").forEach(i => i.value = "");
+
+  // Reset all bars back to 0% width
   document.querySelectorAll(".bar").forEach(b => b.style.width = "0%");
+
+  // Reset displayed numbers back to 0
   document.getElementById("work").textContent =
   document.getElementById("ke").textContent =
   document.getElementById("pe").textContent =
   document.getElementById("total").textContent =
   document.getElementById("power").textContent = "0";
-
 }
 
   </script>
