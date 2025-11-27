@@ -17,7 +17,7 @@
     }
 
     /* NAVBAR */
-        .navbar {
+    .navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -37,7 +37,6 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
       color: transparent;
-
     }
 
     .navbar ul {
@@ -60,13 +59,14 @@
       color: #4d8bff;
     }
 
-        .info {
+    /* MAIN INFO BOX */
+    .info {
       position: absolute;
       top: 130px;
       left: 40px;
       padding: 0;
       margin: 20px auto 30px auto;
-        width: 500px; /* change this to whatever you want */
+      width: 500px; /* adjust as needed */
     }
 
     .info h1 {
@@ -88,98 +88,86 @@
       font-weight: 400;
       letter-spacing: 0.2px;
     }
-    /* BUTTONS */
+
+    /* BUTTON STYLES */
     .upbuttom {
       display: block;
       list-style: none;
     }
 
     .up {
-  background: linear-gradient(135deg, #16387A, #1d4fb8); 
-  color: #ffffff;
-  border: 2px solid #ffffff; /* whitish outline */
-  
-  padding: 5px 22px;
-  font-size: 15px;
-    font-weight: 600;
-
-  border-radius: 10px;
-  cursor: pointer;
-  font-family: "Montserrat", sans-serif;
-
-  /* modern smooth animation */
-  transition: all 0.25s ease;
-
-  /* soft glow to pop on dark bg */
-  box-shadow: 0 0 10px rgba(22, 56, 122, 0.25);
+      background: linear-gradient(135deg, #16387A, #1d4fb8); 
+      color: #ffffff;
+      border: 2px solid #ffffff;
+      padding: 5px 22px;
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 10px;
+      cursor: pointer;
+      font-family: "Montserrat", sans-serif;
+      transition: all 0.25s ease;
+      box-shadow: 0 0 10px rgba(22, 56, 122, 0.25);
     }
 
     .up:hover {
-  background: linear-gradient(135deg, #1d4fb8, #2966e3);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(41, 102, 227, 0.45);
-  border-color: rgba(255, 255, 255, 0.6);
+      background: linear-gradient(135deg, #1d4fb8, #2966e3);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(41, 102, 227, 0.45);
+      border-color: rgba(255, 255, 255, 0.6);
     }
 
     .up:active {
-    transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(41, 102, 227, 0.3);
-}
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(41, 102, 227, 0.3);
+    }
 
     /* PANELS */
-  .panel {
-  position: fixed;
-  top: 100px;
-  right: 40px;
-
-  width: 430px;
-  height: 75vh;
-
-  background: rgba(15, 20, 35, 0.65);
-  backdrop-filter: blur(12px);
-
-  border: 2px solid rgba(255,255,255,0.15);
-  border-radius: 18px;
-
-  padding: 25px;
-  color: white;
-
-  overflow-y: auto;
-  box-shadow: 0 0 20px rgba(0,0,0,0.35);
-
-  /* panels are kept as hidden content sources */
-  display: none;
-}
-
-  /* Single right-side info box that displays selected topic */
-  .info-panel {
-    position: fixed;
-    top: 100px;
-    right: 40px;
-    width: 750px;
-    height: 75vh;
-    background: rgba(15, 20, 35, 0.75);
-    backdrop-filter: blur(10px);
-    border: 2px solid rgba(255,255,255,0.08);
-    border-radius: 18px;
-    padding: 20px 22px;
-    color: #fff;
-    overflow-y: auto;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.45);
-    display: block;
-  }
-
-  .info-panel h2 { color: #4d8bff; margin-top: 6px; }
-  .info-panel .example { margin-top: 10px; color: #dfefff; }
-
-    .panel.active {
-      right: 0;
+    .panel {
+      position: fixed;
+      top: 100px;
+      right: 40px;
+      width: 430px;
+      height: 75vh;
+      background: rgba(15, 20, 35, 0.65);
+      backdrop-filter: blur(12px);
+      border: 2px solid rgba(255,255,255,0.15);
+      border-radius: 18px;
+      padding: 25px;
+      color: white;
+      overflow-y: auto;
+      box-shadow: 0 0 20px rgba(0,0,0,0.35);
+      display: none; /* hidden by default */
     }
 
-    .panel h2 {
-      color: #ffcd00;
-      margin-top: 20px;
+    /* Scrollbar for info-panel */
+    .info-panel::-webkit-scrollbar { width: 6px; }
+    .info-panel::-webkit-scrollbar-thumb { background: rgba(77,139,255,0.5); border-radius: 3px; }
+    .info-panel::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); }
+
+    /* INFO PANEL */
+    .info-panel {
+      position: fixed;
+      top: 100px;
+      right: 40px;
+      width: 750px;
+      height: 75vh;
+      background: rgba(15, 20, 35, 0.75);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      padding: 20px 22px;
+      color: #fff;
+      overflow-y: auto;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.45);
+      display: block;
     }
+
+    .info-panel h2 { color: #4d8bff; margin-top: 6px; font-weight: 800; }
+    .info-panel .example { margin-top: 10px; color: #dfefff; }
+
+    .panel.active { right: 0; }
+
+    .panel h2 { color: #ffcd00; margin-top: 20px; }
 
     .closeBtn {
       background: none;
@@ -193,11 +181,9 @@
       transition: 0.2s;
     }
 
-    .closeBtn:hover {
-      color: #ffcd00;
-    }
-    /* LOWER BUTTONS */
-    /* Column of buttons (combined upper + lower) */
+    .closeBtn:hover { color: #ffcd00; }
+
+    /* BUTTON COLUMN */
     .button-column {
       position: absolute;
       top: 350px;
@@ -206,74 +192,168 @@
       flex-direction: column;
       gap: 14px;
       align-items: center;
-
     }
 
+    /* RESOURCE LINKS */
+    .resource-link {
+      display: inline-block;
+      padding: 8px 12px;
+      margin: 6px 0;
+      background: rgba(77, 139, 255, 0.12);
+      border: 1px solid rgba(77, 139, 255, 0.35);
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #aecdff;
+      text-decoration: none;
+      transition: 0.25s ease;
+    }
+
+    .resource-link:hover {
+      background: rgba(77, 139, 255, 0.32);
+      border-color: rgba(77, 139, 255, 0.55);
+      transform: translateY(-2px);
+      color: #ffffff;
+    }
+
+    .resource-link:active {
+      transform: translateY(0px);
+      background: rgba(77, 139, 255, 0.5);
+    }
   </style>
 </head>
 
 <body>
   <!-- NAVBAR -->
- <nav class="navbar">
+  <nav class="navbar">
     <div class="logo-container">
       <span class="logo-text">E-Analyzer</span>
     </div>
     <ul>
-      <li><a href="index.html">Basic Mode</a></li>
-      <li><a href="advance.html">Advanced Mode</a></li>
-      <li><a href="learn.html">Learn</a></li>
-      <li><a href="quiz.html">Quiz</a></li>
-      <li><a href="about.html">About</a></li>
+      <li><a href="energymain.html">Basic Mode</a></li>
+      <li><a href="advancemain.html">Advanced Mode</a></li>
+      <li><a href="learnmain.html">Learn</a></li>
+      <li><a href="quiz4.html">Quiz</a></li>
     </ul>
   </nav>
 
-
-       <div class="info" style="margin-left: 80px; max-width: 600px;">
-    <h1>Energy Calculator</h1>
-   <p>  Compute work, kinetic energy, potential energy, total energy, and power. 
-  Enter values for mass, velocity, height, distance, and time to see results with visual bars. 
-  Explore how changing each value affects energy outcomes instantly.
-
-</p>
+  <div class="info" style="margin-left: 80px; max-width: 600px;">
+    <h1>Learn Energy</h1>
+    <p>
+      Learn about work, kinetic energy, potential energy, total energy, and power. 
+    </p>
   </div>
-
 
   <!-- PANELS -->
   <div id="panel1" class="panel">
     <button class="closeBtn">✕</button>
     <h2>Energy Basics</h2>
-    <p>🟩 Energy is the capacity to do work — it makes things move or change.
-      <br><br>Key Types: Kinetic Energy (KE) and Potential Energy (PE).
-      <br>Formulas:<br>PE = mgh<br>KE = ½mv²<br><br>
-      Example: A roller coaster at the top of a hill has high PE. As it goes down, PE turns into KE.
+
+    <p><b>What is Energy?</b></p>
+    <p>
+      Energy is the ability to do work or cause change. Everything happening 
+      around us — motion, heat, sound, electricity, growth, and even thinking — 
+      requires energy.
     </p>
+
+    <p><b>Why Energy Matters?</b></p>
+    <ul>
+      <li>Your body uses chemical energy to move.</li>
+      <li>Plants use light energy from the Sun.</li>
+      <li>Machines use electrical or mechanical energy.</li>
+      <li>Cars use chemical energy in fuel.</li>
+      <li>Phones use battery energy.</li>
+    </ul>
+
+    <p><b>Main Categories of Energy:</b></p>
+    <p>
+      Although there are many forms (thermal, chemical, electrical, nuclear), physics focuses heavily on mechanical energy, which includes:
+    </p>
+    <ul>
+      <li><b>Kinetic Energy (KE) -</b> Energy due to motion. Faster or heavier objects have more kinetic energy.</li>
+      <li><b>Potential Energy (PE) -</b> Stored energy due to position or condition. Higher objects store more potential energy.</li>
+    </ul>
+
+    <p><b>Units of Energy:</b> A The SI unit is the joule (J).</p>
+
+    <p><b>More Resources:</b></p>
+    <ul>
+      <li><a class="resource-link" href="https://www.onlinemathlearning.com/physics-work.html" target="_blank">📘 Energy, Work and Power</a></li>
+      <li><a class="resource-link" href="https://www.youtube.com/watch?v=u36H4Uo3rPM&t=27s" target="_blank">▶️ What is Energy?</a></li>
+    </ul>
   </div>
 
   <div id="panel2" class="panel">
     <button class="closeBtn">✕</button>
     <h2>Work</h2>
-    <p>💪 Work is the transfer of energy that occurs when a force causes movement.
-      <br><br>Formula: W = F × d
-      <br>Unit: Joule (J)
-      <br><br>Example: If a 50 N force moves an object 3 m, W = 150 J.
+
+    <p><b>What is Work?</b></p>
+    <p>
+      Work is done when a force causes an object to move in the direction of the force.
+      If no movement happens, no work is done.
     </p>
+
+    <p><b>Formula:</b> W = F × d</p>
+    <ul>
+      <li>F → force (N)</li>
+      <li>d → distance moved (m)</li>
+    </ul>
+
+    <p><b>Conditions:</b></p>
+    <ul>
+      <li>If force ⟂ motion → W = 0</li>
+      <li>If no displacement → W = 0</li>
+      <li>If object moves opposite force → work is negative</li>
+    </ul>
+
+    <p><b>Example:</b><br>
+      A 60 N force pushes a box 4 m:<br>
+      W = 60 × 4 = 240 J
+    </p>
+
+    <p><b>Real-life Uses:</b> lifting loads, pushing carts, pulling ropes, using tools.</p>
+
+    <p><b>More Resources:</b></p>
+    <ul>
+      <li><a class="resource-link" href="https://phys.libretexts.org/Bookshelves/University_Physics/University_Physics_(OpenStax)/Book%3A_University_Physics_I_-_Mechanics_Sound_Oscillations_and_Waves_(OpenStax)/07%3A_Work_and_Kinetic_Energy/7.02%3A_Work" target="_blank">📘 Work</a></li>
+      <li><a class="resource-link" href="https://www.youtube.com/watch?v=i7ruTvfeGiM" target="_blank">▶️ What is Work?</a></li>
+    </ul>
   </div>
 
   <div id="panel3" class="panel">
     <button class="closeBtn">✕</button>
     <h2>Efficiency</h2>
-    <p>⚙️ Efficiency measures how effectively energy is converted to useful work.
-      <br><br>Formula: η = (Output / Input) × 100%
-      <br><br>Example: If a machine uses 200 J and outputs 150 J of work,
-      its efficiency is 75%.
+
+    <p><b>What is Efficiency?</b></p>
+    <p>
+      Efficiency measures how much input energy becomes useful output.
+      No machine is 100% efficient because some energy is lost to heat, friction, or sound.
     </p>
+
+    <p><b>Formula:</b> η = (Useful Output / Total Input) × 100%</p>
+
+    <p><b>Example:</b><br>
+      A machine uses 200 J but outputs only 150 J:<br>
+      Efficiency = (150 / 200) × 100% = 75%
+    </p>
+
+    <p><b>Ways to Improve Efficiency:</b></p>
+    <ul>
+      <li>Reduce friction (using oil or lubrication)</li>
+      <li>Use smoother surfaces</li>
+      <li>Improve motor design</li>
+      <li>Use lightweight materials</li>
+    </ul>
+
+    <p><b>Real-life Uses:</b> appliances, electric cars, power plants, lighting systems.</p>
   </div>
 
   <div id="panel4" class="panel">
     <button class="closeBtn">✕</button>
     <h2>E-Analyzer</h2>
-    <p>📊 The Energy Analyzer calculates Work, Energy, Power, and Efficiency.
-      <br><br>It helps visualize how energy changes forms in real-time and
+    <p>
+      📊 The Energy Analyzer calculates Work, Energy, Power, and Efficiency.<br><br>
+      It helps visualize how energy changes forms in real-time and
       how different factors affect efficiency.
     </p>
   </div>
@@ -285,83 +365,177 @@
     <button class="up" data-panel="panel-power">Power</button>
     <button class="up" data-panel="panel3">Efficiency</button>
     <button class="up" data-panel="panel-apps">Real-life Applications</button>
-    <a href="quizmain.html"><button class="up">Quiz</button></a>
+    <a href="quiz4.html"><button class="up">Quiz</button></a>
   </div>
 
-<!-- SINGLE INFO BOX (shows content based on selection) -->
-<div id="learn-box" class="info-panel" aria-live="polite">
-  <h2>Learn</h2>
-  <div id="learn-content">
-    <p>Select a topic on the left to see a concise explanation, formula, and example here.</p>
+  <!-- SINGLE INFO BOX (shows content based on selection) -->
+  <div id="learn-box" class="info-panel" aria-live="polite">
+    <div id="learn-content">
+      <p>Select a topic on the left to see a concise explanation, formula, and example here.</p>
+    </div>
   </div>
-</div>
 
-<!-- PANELS (all slide from right) -->
-<div id="panel-energy" class="panel">
-  <button class="closeBtn">✕</button>
-  <h2>Types of Energy</h2>
-  <p>
-    <b>Kinetic Energy (KE):</b> Energy due to motion.<br>
-    <b>Potential Energy (PE):</b> Energy due to height or position.<br>
-    Example: Roller coaster at top of hill → high PE, going down → KE.
-  </p>
-</div>
+  <!-- PANELS (all slide from right) -->
+  <div id="panel-energy" class="panel">
+    <button class="closeBtn">✕</button>
+    <h2>Types of Mechanical Energy</h2>
 
-<div id="panel-power" class="panel">
-  <button class="closeBtn">✕</button>
-  <h2>Power</h2>
-  <p>
-    Power is the rate at which work is done or energy is used.<br>
-    Formula: P = W / t or P = F × v<br>
-    Example: Faster you climb stairs → more power exerted.
-  </p>
-</div>
-
-<div id="panel-apps" class="panel">
-  <button class="closeBtn">✕</button>
-  <h2>Real-life Applications</h2>
-  <p>
+    <!-- KINETIC ENERGY -->
+    <h3><b>1. Kinetic Energy (KE)</b></h3>
+    <p>
+      Kinetic Energy is the energy an object has because of its motion.
+      Faster or heavier objects have more KE.
+    </p>
+    <p><b>Formula:</b> KE = ½ m v²</p>
     <ul>
-      <li>Lifting a backpack → Work & PE</li>
-      <li>Moving car → KE</li>
-      <li>Electric fan → Rotational KE & Power</li>
-      <li>Climbing stairs → Work & Power</li>
+      <li>m → mass (kg)</li>
+      <li>v → velocity (m/s)</li>
     </ul>
-  </p>
-</div>
+    <p><b>Example:</b> A 2 kg ball moving at 4 m/s has:<br>KE = 0.5 × 2 × 4² = 16 J</p>
+
+    <!-- POTENTIAL ENERGY -->
+    <h3><b>2. Potential Energy (PE)</b></h3>
+    <p>
+      Potential Energy is stored energy due to height or position.
+      Higher objects have more gravitational potential energy.
+    </p>
+    <p><b>Formula:</b> PE = m g h</p>
+    <ul>
+      <li>m → mass (kg)</li>
+      <li>g → 9.8 m/s²</li>
+      <li>h → height above ground (m)</li>
+    </ul>
+    <p><b>Example:</b> Lifting a 3 kg object to 2 m stores:<br>PE = 3 × 9.8 × 2 = 58.8 J</p>
+
+    <!-- TOTAL MECHANICAL ENERGY -->
+    <p><b>Total Mechanical Energy:</b> ME = KE + PE</p>
+    <p><b>Real-life Example:</b> Roller coasters convert PE → KE and back again.</p>
+
+    <hr>
+
+    <!-- EXTRA: ROTATIONAL KE -->
+    <h3><b>3. Rotational Kinetic Energy</b></h3>
+    <p>Rotating objects also have kinetic energy due to spin.</p>
+    <p><b>Formula:</b> KE = ½ I ω²</p>
+    <ul>
+      <li>I → moment of inertia (kg·m²)</li>
+      <li>ω → angular speed (rad/s)</li>
+    </ul>
+
+    <hr>
+
+    <!-- EXTRA: ENERGY CONSUMED -->
+    <h3><b>4. Energy Consumed</b></h3>
+    <p>Energy used over time is calculated using:</p>
+    <p><b>Energy = Power × Time</b></p>
+
+    <p><b>More Resources:</b></p>
+    <ul>
+      <li><a class="resource-link" href="https://taraenergy.com/blog/mechanical-energy-101/" target="_blank">📘 Mechanical Energy 101</a></li>
+      <li><a class="resource-link" href="https://www.youtube.com/watch?v=28ngrrQkCBY" target="_blank">▶️ What is Mechanical Energy?</a></li>
+    </ul>
+  </div>
+
+  <div id="panel-power" class="panel">
+    <button class="closeBtn">✕</button>
+    <h2>Power</h2>
+
+    <p><b>What is Power?</b></p>
+    <p>
+      Power is the rate at which work is done or energy is used.
+      Higher power means a task is completed faster.
+    </p>
+
+    <p><b>Formulas for Power:</b></p>
+    <ul>
+      <li><b>P = F × v &nbsp; (Force × velocity)</b></li>
+      <li><b>P = F × (distance / time)</b></li>
+      <li><b>P = Work / time</b></li>
+      <li><b>P = Energy / time</b></li>
+    </ul>
+
+    <p><b>Units:</b> Watt (W) where 1 W = 1 Joule/second</p>
+
+    <p><b>Examples:</b></p>
+    <ul>
+      <li>Running up stairs faster means using more power.</li>
+      <li>A 1000 W appliance consumes energy faster than a 300 W one.</li>
+    </ul>
+
+    <p><b>Applications:</b> motors, vehicles, workouts, machines, electrical devices.</p>
+
+    <p><b>More Resources:</b></p>
+    <ul>
+      <li><a class="resource-link" href="https://www.physicsclassroom.com/class/energy/lesson-1/power" target="_blank">📘 Power</a></li>
+      <li><a class="resource-link" href="https://www.youtube.com/watch?v=4mf6G0hIMUM" target="_blank">▶️ What is Power?</a></li>
+    </ul>
+  </div>
+
+  <div id="panel-apps" class="panel">
+    <button class="closeBtn">✕</button>
+    <h2>Real-life Applications of Work, Energy & Power</h2>
+
+    <p><b>Everyday Situations:</b></p>
+    <ul>
+      <li><b>Lifting a backpack:</b> increases PE</li>
+      <li><b>Running or biking:</b> high KE, depends on speed</li>
+      <li><b>Climbing stairs:</b> doing work against gravity; higher power if done faster</li>
+      <li><b>Using an elevator:</b> motor does work quickly → high power</li>
+    </ul>
+
+    <p><b>Machines:</b></p>
+    <ul>
+      <li><b>Cars:</b> convert chemical → kinetic energy; engine power affects acceleration</li>
+      <li><b>Hydropower plants:</b> PE of water → electrical energy</li>
+      <li><b>Generators:</b> mechanical → electrical energy</li>
+      <li><b>Bulldozers/cranes:</b> high power output for heavy lifting</li>
+    </ul>
+
+    <p><b>Sports:</b></p>
+    <ul>
+      <li><b>Basketball jump shot:</b> PE at highest point</li>
+      <li><b>Soccer kick:</b> KE transferred to ball</li>
+      <li><b>Sprinters:</b> high power output in short bursts</li>
+    </ul>
+
+    <p><b>Home Appliances:</b></p>
+    <ul>
+      <li><b>Washing machines:</b> use power to rotate the drum</li>
+      <li><b>Air conditioners:</b> consume electrical energy, rated by power (kW)</li>
+      <li><b>Microwave ovens:</b> high power → faster heating</li>
+    </ul>
+  </div>
 
   <!-- SCRIPT -->
 <script>
-  // Replace sliding panels with a single info box.
-  // Clicking any .up or .down button will display the corresponding panel's content
-  // inside the right-side #learn-box. The original panel elements remain as
-  // hidden content sources (so their text can be reused).
-
+  // Get all buttons with classes "up" and "down"
   const buttons = document.querySelectorAll('.up, .down');
+
+  // Get the box where the text will appear
   const learnContent = document.getElementById('learn-content');
 
+  // Function: updates text inside learnContent based on panel
   function updateLearnInfo(panelId) {
-    if (!panelId) return;
-    const src = document.getElementById(panelId);
-    if (!src) return;
+    if (!panelId) return; // if no panel is given, stop
 
-    // Extract title and paragraph content from the source panel, ignoring close button
-    const titleEl = src.querySelector('h2');
-    const paraEl = src.querySelector('p');
+    const panel = document.getElementById(panelId); // find the panel
 
-    let html = '';
-    if (titleEl) html += `<h2>${titleEl.textContent}</h2>`;
-    if (paraEl) html += `<div class="example">${paraEl.innerHTML}</div>`;
-
-    learnContent.innerHTML = html || '<p>Select a topic to learn more.</p>';
+    if (panel) {
+      // copy panel's content into the learn-content box
+      learnContent.innerHTML = panel.innerHTML;
+    }
   }
 
-  buttons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const target = btn.dataset.panel;
-      updateLearnInfo(target);
+  // When ANY up/down button is clicked
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      const panelId = button.getAttribute('data-panel'); // get which panel to show
+      updateLearnInfo(panelId); // update content in the right box
     });
   });
 </script>
+
+
+
 </body>
 </html>
