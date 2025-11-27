@@ -260,11 +260,10 @@ body {
 <nav class="navbar">
   <div class="logo-container"><span class="logo-text">E-Analyzer</span></div>
   <ul>
-      <li><a href="index.html">Basic Mode</a></li>
-      <li><a href="advance.html">Advanced Mode</a></li>
-      <li><a href="learn.html">Learn</a></li>
-      <li><a href="quiz.html">Quiz</a></li>
-      <li><a href="about.html">About</a></li>
+      <li><a href="energymain.html">Basic Mode</a></li>
+      <li><a href="advancemain.html">Advanced Mode</a></li>
+      <li><a href="learnmain.html">Learn</a></li>
+      <li><a href="quiz4.html">Quiz</a></li>
   </ul>
 </nav>
 
@@ -287,64 +286,109 @@ body {
 
 
 <script>   
+// List of all quiz questions, choices, and correct answers
 const questions = [
-  { q: "What is the SI unit of force?", o: ["Joule", "Newton", "Pascal", "Watt"], a: "Newton" },
-  { q: "What is the acceleration due to gravity on Earth?", o: ["8.9 m/s²", "9.8 m/s²", "10 m/s²", "7.8 m/s²"], a: "9.8 m/s²" },
-  { q: "Energy is measured in?", o: ["Newton", "Pascal", "Joule", "Watt"], a: "Joule" },
-  { q: "Power is equal to?", o: ["Work / Time", "Force × Distance", "Mass × Velocity", "Energy / Force"], a: "Work / Time" },
-  { q: "Which law states 'Every action has an equal and opposite reaction'?", o: ["Newton's 1st Law", "Newton's 2nd Law", "Newton's 3rd Law", "Law of Inertia"], a: "Newton's 3rd Law" },
-  { q: "What is the SI unit of energy?", o: ["Joule", "Watt", "Newton", "Meter"], a: "Joule" },
-  { q: "What is kinetic energy formula?", o: ["mv²", "½mv²", "mgh", "F×d"], a: "½mv²" },
-  { q: "What is potential energy formula?", o: ["½mv²", "mgh", "F×d", "p×v"], a: "mgh" },
-  { q: "Which quantity is a vector?", o: ["Speed", "Mass", "Distance", "Velocity"], a: "Velocity" },
-  { q: "What is the SI unit of pressure?", o: ["Joule", "Newton", "Pascal", "Watt"], a: "Pascal" }
+{ q: "Work is zero when the force applied is?", o: ["Zero", "Perpendicular to motion", "Parallel to motion", "Both A and B"], a: "Both A and B" },
+{ q: "If a person lifts a 10 kg box 2 m high, what type of energy is gained by the box?", o: ["Kinetic energy", "Potential energy", "Thermal energy", "Electrical energy"], a: "Potential energy" },
+{ q: "What type of energy does a moving car have?", o: ["Potential energy", "Kinetic energy", "Chemical energy", "Nuclear energy"], a: "Kinetic energy" },
+{ q: "Which of the following is an example of doing work?", o: ["Holding a heavy book stationary", "Pushing a cart across a floor", "Standing still", "Leaning against a wall"], a: "Pushing a cart across a floor" },
+{ q: "If the displacement of an object is zero, the work done is?", o: ["Maximum", "Zero", "Negative", "Depends on the force"], a: "Zero" },
+{ q: "Which of these increases when work is done on an object?", o: ["Mass", "Energy", "Speed of light", "Gravity"], a: "Energy" },
+{ q: "What is the formula for work when force and displacement are at an angle θ?", o: ["W = F × d × sinθ", "W = F × d × cosθ", "W = F + d", "W = F × d / θ"], a: "W = F × d × cosθ" },
+{ q: "A machine does 500 J of work in 10 seconds. What is its power?", o: ["5 W", "50 W", "5000 W", "100 W"], a: "50 W" },
+{ q: "Energy can neither be created nor destroyed according to?", o: ["Newton's Law", "Law of Conservation of Energy", "Ohm's Law", "Hooke's Law"], a: "Law of Conservation of Energy" },
+{ q: "Which of these is a scalar quantity?", o: ["Force", "Work", "Velocity", "Acceleration"], a: "Work" },
+{ q: "If a car engine does 2000 J of work in 5 seconds, the power output is?", o: ["100 W", "400 W", "2000 W", "500 W"], a: "400 W" },
+{ q: "The energy possessed by a stretched rubber band is?", o: ["Kinetic energy", "Potential energy", "Chemical energy", "Thermal energy"], a: "Potential energy" },
+{ q: "What is the SI unit of work?", o: ["Newton", "Joule", "Watt", "Pascal"], a: "Joule" },
+{ q: "Which of these is an example of kinetic energy?", o: ["A parked car", "A rolling ball", "A book on a shelf", "A compressed spring"], a: "A rolling ball" },
+{ q: "What type of energy transformation occurs when you lift a ball and throw it upwards?", o: ["Kinetic to thermal", "Potential to kinetic", "Kinetic to potential", "Electrical to chemical"], a: "Kinetic to potential" },
+{ q: "If work is done against friction, the energy is transformed into?", o: ["Kinetic energy", "Thermal energy", "Potential energy", "Light energy"], a: "Thermal energy" },
+{ q: "A 50 N force moves an object 4 m in the direction of the force. How much work is done?", o: ["200 J", "50 J", "100 J", "250 J"], a: "200 J" },
+{ q: "Which factor does NOT affect the work done on an object?", o: ["Force applied", "Displacement", "Angle between force and displacement", "Color of the object"], a: "Color of the object" },
+{ q: "Power is the rate at which?", o: ["Force is applied", "Work is done", "Velocity changes", "Energy is stored"], a: "Work is done" },
+{ q: "Which of the following devices is designed to do work more easily?", o: ["Lever", "Pulley", "Inclined plane", "All of the above"], a: "All of the above" }
 ];
 
+// Randomly shuffle all questions and pick 10 only
 const selected = questions.sort(() => 0.5 - Math.random()).slice(0, 10);
+
+// Get quiz container and results panel from HTML
 const quizBox = document.getElementById("quiz-box");
 const resultsBar = document.getElementById("results-bar");
 
-// Quiz questions
+// Display each question inside the quiz box
 selected.forEach((item, i) => {
+  // Create answer options (radio buttons)
   const opts = item.o.map((o, idx) => `
     <input type="radio" id="q${i}_${idx}" name="q${i}" value="${o}">
     <label for="q${i}_${idx}">${o}</label>
   `).join("");
-  quizBox.innerHTML += `<div class="question"><p><b>Q${i + 1}:</b> ${item.q}</p><div class="options">${opts}</div></div>`;
+
+  // Insert question HTML
+  quizBox.innerHTML += `
+    <div class="question">
+      <p><b>Q${i + 1}:</b> ${item.q}</p>
+      <div class="options">${opts}</div>
+    </div>`;
 });
 
-// Results panel
+// Create result rows (one per question) inside the results sidebar
 function initResultsBar() {
-  resultsBar.innerHTML = "";
+  resultsBar.innerHTML = ""; // clear previous
+
   selected.forEach((_, i) => {
     const row = document.createElement("div");
-    row.className = "result-row pending";
-    row.innerHTML = `<span class='icon'>⬜</span> Q${i+1}: <span class='pending-text'>Not answered</span>`;
+    row.className = "result-row pending"; // initial state
+    row.innerHTML = `
+      <span class='icon'>⬜</span> 
+      Q${i+1}: <span class='pending-text'>Not answered</span>
+    `;
     resultsBar.appendChild(row);
   });
+
+  // Add total score display at bottom
   const total = document.createElement("div");
   total.className = "total-score";
   total.textContent = `Total Score: —`;
   resultsBar.appendChild(total);
 }
-initResultsBar();
+initResultsBar(); // Run function immediately
 
-// Submit answers
+// When user clicks the "Submit Answers" button
 document.getElementById("submit-btn").addEventListener("click", () => {
   let score = 0;
+
   const rows = resultsBar.querySelectorAll('.result-row');
+
+  // Check each question's selected answer
   rows.forEach((row, i) => {
+    // Get the selected radio button for question i
     const selectedOption = document.querySelector(`input[name="q${i}"]:checked`);
+
+    // Compare selected answer with the correct one
     const correct = selectedOption && selectedOption.value === selected[i].a;
-    if (correct) score++;
+
+    if (correct) score++; // add 1 to score if correct
+
+    // Update result row visual color and icon
     row.className = "result-row " + (correct ? "correct" : "incorrect");
-    row.innerHTML = `<span class='icon'>${correct ? "✔️" : "❌"}</span> Q${i+1}: <span>${correct ? "Correct" : "Incorrect"}</span>`;
+    row.innerHTML = `
+      <span class='icon'>${correct ? "✔️" : "❌"}</span> 
+      Q${i+1}: <span>${correct ? "Correct" : "Incorrect"}</span>
+    `;
   });
-  resultsBar.querySelector('.total-score').textContent = `Total Score: ${score} / ${selected.length}`;
+
+  // Update final total score display
+  resultsBar.querySelector('.total-score').textContent =
+    `Total Score: ${score} / ${selected.length}`;
+
+  // Update text result (if there's an element with id="result")
   const result = document.getElementById("result");
   result.textContent = `You scored ${score} / ${selected.length}`;
   result.classList.add('show');
 });
+
 </script>
 </body>
 </html>
