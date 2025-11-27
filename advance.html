@@ -262,11 +262,10 @@
       <span class="logo-text">E-Analyzer</span>
     </div>
     <ul>
-      <li><a href="index.html">Basic Mode</a></li>
-      <li><a href="advance.html">Advanced Mode</a></li>
-      <li><a href="learn.html">Learn</a></li>
-      <li><a href="quiz.html">Quiz</a></li>
-      <li><a href="about.html">About</a></li>
+      <li><a href="energymain.html">Basic Mode</a></li>
+      <li><a href="advancemain.html">Advanced Mode</a></li>
+      <li><a href="learnmain.html">Learn</a></li>
+      <li><a href="quiz4.html">Quiz</a></li>
     </ul>
   </nav>
 
@@ -309,63 +308,147 @@
     <div class="bar-container"><div class="bar" id="resultBar"></div></div>
   </div>
 
-  <script>
-    function updateInputs() {
-      const mode = document.getElementById("find").value;
-      const area = document.getElementById("inputs-area");
-      area.innerHTML = "";
+<script>
+  // This function changes the input fields depending on what the user wants to find
+  function updateInputs() {
+    const mode = document.getElementById("find").value;  // Get selected option
+    const area = document.getElementById("inputs-area"); // Container for input fields
+    area.innerHTML = ""; // Clear previous inputs
 
-      const addInput = (id, label, unit) => {
-        area.innerHTML += `
-          <label>${label} (${unit}):</label>
-          <input type="number" id="${id}" placeholder="Enter ${label.toLowerCase()}">
-        `;
-      };
+    // Helper function for creating input fields dynamically
+    const addInput = (id, label, unit) => {
+      area.innerHTML += `
+        <label>${label} (${unit}):</label>
+        <input type="number" id="${id}" placeholder="Enter ${label.toLowerCase()}">
+      `;
+    };
 
-      switch(mode) {
-        case "work": addInput("force", "Force", "N"); addInput("distance", "Distance", "m"); break;
-        case "power": addInput("work", "Work", "J"); addInput("time", "Time", "s"); break;
-        case "velocity": addInput("power", "Power", "W"); addInput("force", "Force", "N"); break;
-        case "height": addInput("pe", "Potential Energy", "J"); addInput("mass", "Mass", "kg"); break;
-        case "mass": addInput("energy", "Energy", "J"); addInput("velocity", "Velocity", "m/s"); break;
-        case "energy": addInput("mass", "Mass", "kg"); addInput("velocity", "Velocity", "m/s"); break;
-        case "force": addInput("work", "Work", "J"); addInput("distance", "Distance", "m"); break;
-        case "distance": addInput("work", "Work", "J"); addInput("force", "Force", "N"); break;
-        case "time": addInput("work", "Work", "J"); addInput("power", "Power", "W"); break;
-      }
+    // This switch adds the correct inputs based on what formula is needed
+    switch(mode) {
+
+      case "work":          // W = F × d
+        addInput("force", "Force", "N");
+        addInput("distance", "Distance", "m");
+        break;
+
+      case "power":         // P = W / t
+        addInput("work", "Work", "J");
+        addInput("time", "Time", "s");
+        break;
+
+      case "velocity":      // v = P / F
+        addInput("power", "Power", "W");
+        addInput("force", "Force", "N");
+        break;
+
+      case "height":        // h = PE / (m·g)
+        addInput("pe", "Potential Energy", "J");
+        addInput("mass", "Mass", "kg");
+        break;
+
+      case "mass":          // m = (2E) / v²
+        addInput("energy", "Energy", "J");
+        addInput("velocity", "Velocity", "m/s");
+        break;
+
+      case "energy":        // E = ½ m v²
+        addInput("mass", "Mass", "kg");
+        addInput("velocity", "Velocity", "m/s");
+        break;
+
+      case "force":         // F = W / d
+        addInput("work", "Work", "J");
+        addInput("distance", "Distance", "m");
+        break;
+
+      case "distance":      // d = W / F
+        addInput("work", "Work", "J");
+        addInput("force", "Force", "N");
+        break;
+
+      case "time":          // t = W / P
+        addInput("work", "Work", "J");
+        addInput("power", "Power", "W");
+        break;
+    }
+  }
+
+  // Main calculation function
+  function calculate() {
+    const mode = document.getElementById("find").value;
+    let result = 0;  // Computed value
+    let unit = "";   // Unit to display
+
+    // Shortcut to get input values safely
+    const val = id => parseFloat(document.getElementById(id)?.value) || 0;
+
+    // Each formula is computed here based on the selected mode
+    switch(mode) {
+
+      case "work":
+        result = val("force") * val("distance");
+        unit = "J";
+        break;
+
+      case "power":
+        result = val("work") / val("time");
+        unit = "W";
+        break;
+
+      case "velocity":
+        result = val("power") / val("force");
+        unit = "m/s";
+        break;
+
+      case "height":
+        result = val("pe") / (val("mass") * 9.81); // uses g = 9.81
+        unit = "m";
+        break;
+
+      case "mass":
+        result = (2 * val("energy")) / (val("velocity")**2);
+        unit = "kg";
+        break;
+
+      case "energy":
+        result = 0.5 * val("mass") * (val("velocity")**2);
+        unit = "J";
+        break;
+
+      case "force":
+        result = val("work") / val("distance");
+        unit = "N";
+        break;
+
+      case "distance":
+        result = val("work") / val("force");
+        unit = "m";
+        break;
+
+      case "time":
+        result = val("work") / val("power");
+        unit = "s";
+        break;
     }
 
-    function calculate() {
-      const mode = document.getElementById("find").value;
-      let result = 0;
-      let unit = "";
+    // Display the result
+    document.getElementById("result").textContent = result.toFixed(4);
+    document.getElementById("unit").textContent = unit;
 
-      const val = id => parseFloat(document.getElementById(id)?.value) || 0;
+    // Progress bar animation (scaled value so it fits)
+    document.getElementById("resultBar").style.width =
+      Math.min(result / 1000 * 100, 100) + "%";
+  }
 
-      switch(mode) {
-        case "work": result = val("force") * val("distance"); unit = "J"; break;
-        case "power": result = val("work") / val("time"); unit = "W"; break;
-        case "velocity": result = val("power") / val("force"); unit = "m/s"; break;
-        case "height": result = val("pe") / (val("mass") * 9.81); unit = "m"; break;
-        case "mass": result = (2 * val("energy")) / (val("velocity")**2); unit = "kg"; break;
-        case "energy": result = 0.5 * val("mass") * (val("velocity")**2); unit = "J"; break;
-        case "force": result = val("work") / val("distance"); unit = "N"; break;
-        case "distance": result = val("work") / val("force"); unit = "m"; break;
-        case "time": result = val("work") / val("power"); unit = "s"; break;
-      }
+  // Resetting all values back to default state
+  function resetAdvanced() {
+    document.getElementById('find').value = '';
+    document.getElementById('inputs-area').innerHTML = '';
+    document.getElementById('result').textContent = '0';
+    document.getElementById('unit').textContent = '—';
+    document.getElementById('resultBar').style.width = '0%';
+  }
+</script>
 
-      document.getElementById("result").textContent = result.toFixed(4);
-      document.getElementById("unit").textContent = unit;
-      document.getElementById("resultBar").style.width = Math.min(result / 1000 * 100, 100) + "%";
-    }
-
-    function resetAdvanced() {
-      document.getElementById('find').value = '';
-      document.getElementById('inputs-area').innerHTML = '';
-      document.getElementById('result').textContent = '0';
-      document.getElementById('unit').textContent = '—';
-      document.getElementById('resultBar').style.width = '0%';
-    }
-  </script>
 </body>
 </html>
